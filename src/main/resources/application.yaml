@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    hikari:
+      minimum-idle: 4
+      maximum-pool-size: 16
+      idle-timeout: 30000
+      connection-init-sql: set names utf8mb4
+    dynamic:
+      primary: test_database_1
+      datasource:
+        test_database_1:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://127.0.0.1:3306/test_database_1?characterEncoding=utf8&useSSL=true&serverTimezone=Asia/Shanghai
+          username: root
+          password: mysql
+        test_database_2:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://127.0.0.1:3306/test_database_2?characterEncoding=utf8&useSSL=true&serverTimezone=Asia/Shanghai
+          username: root
+          password: mysql
+
+mybatis:
+  type-aliases-package: com.steven.www.multidatasourcedemo.entity

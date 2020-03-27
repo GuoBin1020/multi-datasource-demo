@@ -1,0 +1,46 @@
+plugins {
+    id 'org.springframework.boot' version '2.2.6.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+}
+
+group = 'com.steven.www'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // webflux包，不使用webflux的话就是web包。
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    // 实用工具，解放了大量写GetSet的时间
+    compileOnly 'org.projectlombok:lombok'
+    // Mysql的驱动包，没啥好说的
+    runtimeOnly 'mysql:mysql-connector-java'
+
+    // 这个就是支持多数据源的工具包
+    implementation 'com.baomidou:dynamic-datasource-spring-boot-starter:3.0.0'
+    // mybatis框架，用于访问数据库
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.2'
+
+    // lombok注解处理器，maven不用关心这个
+    annotationProcessor 'org.projectlombok:lombok'
+    // springboot测试包
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    // webflux加的reactor测试包
+    testImplementation 'io.projectreactor:reactor-test'
+}
+
+test {
+    useJUnitPlatform()
+}
